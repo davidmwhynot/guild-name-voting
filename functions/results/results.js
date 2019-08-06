@@ -42,13 +42,13 @@
 // });
 // const Message = mongoose.model('Message', messageSchema);
 
-const { google } = require('googleapis');
+// const { google } = require('googleapis');
 
-const oauth2Client = new google.auth.OAuth2(
-	process.env.GNAMEVOTING_GOOGLE_CLIENTID,
-	process.env.GNAMEVOTING_GOOGLE_CLIENTSECRET,
-	'https://guild-name-voting.netlify.com/vote'
-);
+// const oauth2Client = new google.auth.OAuth2(
+// 	process.env.GNAMEVOTING_GOOGLE_CLIENTID,
+// 	process.env.GNAMEVOTING_GOOGLE_CLIENTSECRET,
+// 	'https://guild-name-voting.netlify.com/vote'
+// );
 
 // generate a url that asks permissions for Blogger and Google Calendar scopes
 // const scopes = [
