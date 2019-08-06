@@ -1,0 +1,9 @@
+.custom-control-input:hover {
+	cursor: pointer;
+}
+.custom-control-input {
+	z-index: 1 !important;
+	width: calc(100% + 1.5rem);
+	min-height: 1.40625rem;
+	margin-left: -1.5rem;
+}
