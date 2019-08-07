@@ -73,8 +73,10 @@ export default class VotingForm extends React.Component {
 	submit = async e => {
 		this.setState({ error: '', success: '' });
 		e.preventDefault();
-		if (this.state.selected.length < 10) {
-			this.setState({ error: 'Please select 10 names from the list.' });
+		if (this.state.selected.length < 3) {
+			this.setState({
+				error: 'Please select at least 3 names from the list.'
+			});
 		} else {
 			// get the code from the url
 			const params = getParams();
@@ -83,7 +85,10 @@ export default class VotingForm extends React.Component {
 
 			const res = await (await fetch('/.netlify/functions/vote', {
 				method: 'POST',
-				body: JSON.stringify({ code: params.code, vote: this.state.selected }),
+				body: JSON.stringify({
+					code: params.code,
+					vote: this.state.selected
+				}),
 				headers: { 'Content-Type': 'application/json' }
 			})).json();
 
@@ -93,7 +98,8 @@ export default class VotingForm extends React.Component {
 				this.setState({ error: res.error });
 			} else {
 				this.setState({
-					success: 'Your submission has been recorded. Thanks for voting!'
+					success:
+						'Your submission has been recorded. Thanks for voting!'
 				});
 			}
 		}
@@ -106,30 +112,34 @@ export default class VotingForm extends React.Component {
 				{this.state.error === '' ? (
 					''
 				) : (
-					<Alert color='danger'>{this.state.error}</Alert>
+					<Alert color="danger">{this.state.error}</Alert>
 				)}
 				{this.state.success === '' ? (
 					''
 				) : (
-					<Alert color='success'>{this.state.success}</Alert>
+					<Alert color="success">{this.state.success}</Alert>
 				)}
 				<Form>
-					<div className='row'>
+					<div className="row">
 						{checkboxNames.map(checkbox => (
-							<div className='col-12 col-md-6 col-xl-4'>
-								<div className='custom-control custom-checkbox mt-1'>
+							<div className="col-12 col-md-6 col-xl-4">
+								<div className="custom-control custom-checkbox mt-1">
 									<input
-										type='checkbox'
+										type="checkbox"
 										checked={
-											this.state.selected.includes(checkbox) ? true : false
+											this.state.selected.includes(
+												checkbox
+											)
+												? true
+												: false
 										}
 										onChange={this.select}
 										name={checkbox}
-										className='custom-control-input'
+										className="custom-control-input"
 									/>
 									<label
-										className='custom-control-label'
-										htmlFor='customCheck1'
+										className="custom-control-label"
+										htmlFor="customCheck1"
 									>
 										{checkboxLabels[checkbox]}
 									</label>
@@ -137,7 +147,9 @@ export default class VotingForm extends React.Component {
 							</div>
 						))}
 					</div>
-					<h5 className='mt-3'>{this.state.selected.length} / 10 selected</h5>
+					<h5 className="mt-3">
+						{this.state.selected.length} / 10 selected
+					</h5>
 					<button
 						className={`btn btn-primary btn-lg mt-3${
 							this.state.selected.length === 10 ? '' : ' disabled'
