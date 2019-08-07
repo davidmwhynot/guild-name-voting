@@ -103,19 +103,19 @@ exports.handler = async function(event, context) {
 
 			console.log('savedVote', savedVote);
 
-			// 			const mail = {
-			// 				from: 'noreply@davidwhynot.com',
-			// 				to: 'davidmwhynot@gmail.com',
-			// 				subject: 'New Vote',
-			// 				html: `<h1>New Vote</h1>
-			// <h3><b>newVote:</b></h3>
-			// <p>${newVote}</p>
-			// <br /><br />
-			// <h3><b>savedVote:</b></h3>
-			// <p>${JSON.stringify(savedVote, null, 4)}</p>`
-			// 			};
+			const mail = {
+				from: 'noreply@davidwhynot.com',
+				to: 'davidmwhynot@gmail.com',
+				subject: 'New Vote',
+				html: `<h1>New Vote</h1>
+<h3><b>newVote:</b></h3>
+<p>${newVote}</p>
+<br /><br />
+<h3><b>savedVote:</b></h3>
+<p>${JSON.stringify(savedVote, null, 4)}</p>`
+			};
 
-			// 			await mailer.send(mail);
+			await mailer.send(mail);
 
 			return { statusCode: 200, body: JSON.stringify({ success: true }) };
 		}
