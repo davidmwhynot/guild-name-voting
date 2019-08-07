@@ -48,7 +48,7 @@ const voteSchema = new Schema({
 		trim: true
 	},
 	vote: {
-		type: [String],
+		type: [{ type: String }],
 		required: true
 	},
 	time: { type: Date, default: Date.now }
@@ -120,6 +120,9 @@ exports.handler = async function(event, context) {
 		}
 	} catch (err) {
 		console.error(err);
-		return { statusCode: 200, body: JSON.stringify({ error: err.message }) };
+		return {
+			statusCode: 200,
+			body: JSON.stringify({ error: err.message })
+		};
 	}
 };
