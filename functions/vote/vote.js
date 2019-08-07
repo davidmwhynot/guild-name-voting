@@ -95,7 +95,7 @@ exports.handler = async function(event, context) {
 			const newVote = new Vote({
 				id,
 				ip: event.headers['x-forwarded-for'],
-				vote: req.selected
+				vote: req.vote
 			});
 
 			const savedVote = await newVote.save();
