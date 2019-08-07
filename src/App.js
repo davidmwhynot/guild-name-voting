@@ -1,7 +1,9 @@
 import React, { Component } from 'react';
+import { BrowserRouter as Router, Route } from 'react-router-dom';
 
 import Navbar from './components/Navbar';
 import VotingForm from './components/VotingForm';
+import Home from './components/Home';
 
 class App extends Component {
 	constructor() {
@@ -9,7 +11,13 @@ class App extends Component {
 	}
 
 	async componentDidMount() {
-		const res = await (await fetch('/.netlify/functions/results', {
+		// const res = await fetch('/.netlify/functions/server/auth', {
+		// 	method: 'POST'
+		// });
+
+		// console.log('res', res);
+
+		const res = await (await fetch('/.netlify/functions/server', {
 			method: 'POST',
 			body: JSON.stringify({ abc: 123 }),
 			headers: { 'Content-Type': 'application/json' }
@@ -20,12 +28,15 @@ class App extends Component {
 
 	render() {
 		return (
-			<div className='App'>
-				<Navbar />
-				<div className='container' style={{ marginTop: 50 }}>
-					<VotingForm />
+			<Router>
+				<div className='App'>
+					<Navbar />
+					<div className='container' style={{ marginTop: 50 }}>
+						<Route exact path='/' component={Home} />
+						<Route path='/vote' component={VotingForm} />
+					</div>
 				</div>
-			</div>
+			</Router>
 		);
 	}
 }
