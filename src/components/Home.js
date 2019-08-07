@@ -11,7 +11,7 @@ const Home = () => {
 			</p>
 			<a
 				className='btn btn-primary btn-lg'
-				href='https://accounts.google.com/o/oauth2/v2/auth?access_type=offline&scope=email&response_type=code&client_id=447379049298-hr3cst7ggjnhkpcal5v51t95kdou5lfb.apps.googleusercontent.com&redirect_uri=http%3A%2F%2Flocalhost%3A3000%2Fvote'
+				href='https://accounts.google.com/o/oauth2/v2/auth?access_type=offline&scope=email&response_type=code&client_id=447379049298-hr3cst7ggjnhkpcal5v51t95kdou5lfb.apps.googleusercontent.com&redirect_uri=https%3A%2F%2Fguild-name-voting.netlify.com%2Fvote'
 			>
 				Login With Google
 			</a>

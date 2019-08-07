@@ -140,7 +140,7 @@ export default class VotingForm extends React.Component {
 					<h5 className='mt-3'>{this.state.selected.length} / 10 selected</h5>
 					<button
 						className={`btn btn-primary btn-lg mt-3${
-							this.state.selected.length == 10 ? '' : ' disabled'
+							this.state.selected.length === 10 ? '' : ' disabled'
 						}`}
 						onClick={this.submit}
 						disabed={true}

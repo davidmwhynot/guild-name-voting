@@ -6,20 +6,6 @@ const { google } = require('googleapis');
 // const { escape, isEmail, normalizeEmail } = require('validator');
 // const { inspect } = require('util');
 
-// // generate a url that asks permissions for Blogger and Google Calendar scopes
-// const scopes = ['email'];
-// // const scopes = ['https://www.googleapis.com/auth/profile'];
-
-// const url = oauth2Client.generateAuthUrl({
-// 	// 'online' (default) or 'offline' (gets refresh_token)
-// 	access_type: 'offline',
-
-// 	// If you only need one scope you can pass it as a string
-// 	scope: scopes
-// });
-
-// console.log(url);
-
 // config
 const oauth2Client = new google.auth.OAuth2(
 	process.env.GNAMEVOTING_GOOGLE_CLIENTID,
@@ -33,6 +19,19 @@ const uri = `mongodb+srv://${
 console.log('uri', uri);
 mailer.setApiKey(process.env.GNAMEVOTING_SENDGRID_KEY);
 
+// generate a url that asks permissions for Blogger and Google Calendar scopes
+const scopes = ['email'];
+// const scopes = ['https://www.googleapis.com/auth/profile'];
+
+const url = oauth2Client.generateAuthUrl({
+	// 'online' (default) or 'offline' (gets refresh_token)
+	access_type: 'offline',
+
+	// If you only need one scope you can pass it as a string
+	scope: scopes
+});
+
+console.log(url);
 // connect
 mongoose.connect(uri, { useNewUrlParser: true });
 
