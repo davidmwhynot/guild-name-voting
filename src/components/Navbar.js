@@ -1,13 +1,5 @@
 import React from 'react';
-import {
-	Collapse,
-	Navbar,
-	NavbarToggler,
-	NavbarBrand,
-	Nav,
-	NavItem,
-	NavLink
-} from 'reactstrap';
+import { Navbar, NavbarBrand, Nav, NavItem, NavLink } from 'reactstrap';
 
 export default class Example extends React.Component {
 	constructor(props) {
@@ -28,11 +20,23 @@ export default class Example extends React.Component {
 	render() {
 		return (
 			<div>
-				<Navbar color='primary' dark expand={true} style={{ maxHeight: 50 }}>
+				<Navbar
+					color='primary'
+					dark
+					expand={true}
+					style={{ maxHeight: 50, padding: 16 }}
+				>
 					<div className='container'>
-						<NavbarBrand href='/' style={{ fontSize: 16 }}>
+						<NavbarBrand href='/' style={{ fontSize: 20, marginRight: 16 }}>
 							Guild Name Voting
 						</NavbarBrand>
+						<Nav className='mr-auto' navbar style={{ fontSize: 16 }}>
+							<NavItem>
+								<NavLink href='/results' style={{ padding: 10.75 }}>
+									Results
+								</NavLink>
+							</NavItem>
+						</Nav>
 					</div>
 				</Navbar>
 			</div>

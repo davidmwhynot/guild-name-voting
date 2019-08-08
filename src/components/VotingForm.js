@@ -23,23 +23,23 @@ const checkboxNames = [
 	'natus-vincere'
 ];
 const checkboxLabels = {
-	['pretentious']: 'Pretentious',
-	['boosted-idiots']: 'Boosted Idiots',
-	['emphasis']: 'Emphasis',
-	['delirium']: 'Delirium',
-	['classic-culture']: 'Classic Culture',
-	['all-washed-up']: 'All Washed Up',
-	['sunstep-and-friends']: 'Sunstep and Friends',
-	['hazardous']: 'Hazardous',
-	['tenure']: 'Tenure',
-	['wheres-my-cut']: 'wheres my cut',
-	['handled']: 'Handled',
-	['elysium']: 'Elysium',
-	['ram-ranch']: 'Ram Ranch',
-	['hog-house']: 'Hog House',
-	['cosmos-clearance']: 'Cosmos Clearance',
-	['can-i-get-that']: 'CanIGetThat',
-	['natus-vincere']: 'Natus Vincere'
+	pretentious: 'Pretentious',
+	'boosted-idiots': 'Boosted Idiots',
+	emphasis: 'Emphasis',
+	delirium: 'Delirium',
+	'classic-culture': 'Classic Culture',
+	'all-washed-up': 'All Washed Up',
+	'sunstep-and-friends': 'Sunstep and Friends',
+	hazardous: 'Hazardous',
+	tenure: 'Tenure',
+	'wheres-my-cut': 'wheres my cut',
+	handled: 'Handled',
+	elysium: 'Elysium',
+	'ram-ranch': 'Ram Ranch',
+	'hog-house': 'Hog House',
+	'cosmos-clearance': 'Cosmos Clearance',
+	'can-i-get-that': 'CanIGetThat',
+	'natus-vincere': 'Natus Vincere'
 };
 
 export default class VotingForm extends React.Component {
@@ -49,7 +49,8 @@ export default class VotingForm extends React.Component {
 		this.state = {
 			selected: [],
 			error: '',
-			success: ''
+			success: '',
+			loading: false
 		};
 	}
 
@@ -71,11 +72,12 @@ export default class VotingForm extends React.Component {
 	};
 
 	submit = async e => {
-		this.setState({ error: '', success: '' });
 		e.preventDefault();
+		this.setState({ error: '', success: '', loading: true });
 		if (this.state.selected.length < 3) {
 			this.setState({
-				error: 'Please select at least 3 names from the list.'
+				error: 'Please select at least 3 names from the list.',
+				loading: false
 			});
 		} else {
 			// get the code from the url
@@ -95,11 +97,11 @@ export default class VotingForm extends React.Component {
 			console.log('res', res);
 
 			if (res.error) {
-				this.setState({ error: res.error });
+				this.setState({ error: res.error, loading: false });
 			} else {
 				this.setState({
-					success:
-						'Your submission has been recorded. Thanks for voting!'
+					success: 'Your submission has been recorded. Thanks for voting!',
+					loading: false
 				});
 			}
 		}
@@ -112,34 +114,30 @@ export default class VotingForm extends React.Component {
 				{this.state.error === '' ? (
 					''
 				) : (
-					<Alert color="danger">{this.state.error}</Alert>
+					<Alert color='danger'>{this.state.error}</Alert>
 				)}
 				{this.state.success === '' ? (
 					''
 				) : (
-					<Alert color="success">{this.state.success}</Alert>
+					<Alert color='success'>{this.state.success}</Alert>
 				)}
 				<Form>
-					<div className="row">
+					<div className='row'>
 						{checkboxNames.map(checkbox => (
-							<div className="col-12 col-md-6 col-xl-4">
-								<div className="custom-control custom-checkbox mt-1">
+							<div className='col-12 col-md-6 col-xl-4'>
+								<div className='custom-control custom-checkbox mt-1'>
 									<input
-										type="checkbox"
+										type='checkbox'
 										checked={
-											this.state.selected.includes(
-												checkbox
-											)
-												? true
-												: false
+											this.state.selected.includes(checkbox) ? true : false
 										}
 										onChange={this.select}
 										name={checkbox}
-										className="custom-control-input"
+										className='custom-control-input'
 									/>
 									<label
-										className="custom-control-label"
-										htmlFor="customCheck1"
+										className='custom-control-label'
+										htmlFor='customCheck1'
 									>
 										{checkboxLabels[checkbox]}
 									</label>
@@ -147,17 +145,39 @@ export default class VotingForm extends React.Component {
 							</div>
 						))}
 					</div>
-					<h5 className="mt-3">
-						{this.state.selected.length} / 10 selected
-					</h5>
+					<h5 className='mt-3'>{this.state.selected.length} / 10 selected</h5>
 					<button
-						className={`btn btn-primary btn-lg mt-3${
-							this.state.selected.length === 10 ? '' : ' disabled'
+						className={`mb-5 btn btn-primary btn-lg mt-3${
+							this.state.selected.length > 2 ? '' : ' disabled'
 						}`}
 						onClick={this.submit}
 						disabed={true}
+						style={{ padding: '16px 32px' }}
 					>
-						Submit
+						{this.state.loading ? (
+							<div className='loading loading-container'>
+								<svg viewBox='0,0,100,100'>
+									<circle
+										className='inner'
+										cx={50}
+										cy={50}
+										r={45}
+										fill='none'
+										strokeWidth={10}
+									/>
+									<circle
+										className='outer'
+										cx={50}
+										cy={50}
+										r={45}
+										fill='none'
+										strokeWidth={10}
+									/>
+								</svg>
+							</div>
+						) : (
+							'Submit'
+						)}
 					</button>
 				</Form>
 			</div>

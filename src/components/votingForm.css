@@ -7,3 +7,63 @@
 	min-height: 1.40625rem;
 	margin-left: -1.5rem;
 }
+
+.loading {
+	--stroke-1: #53d1df;
+	--stroke-2: #aaaac0;
+	--duration: 4s;
+	--rotate-duration: 2s;
+	--data-1: 600;
+	--data-2: 300;
+	--data-3: 0;
+}
+.loading svg {
+	transform: rotate(270deg);
+	animation: rotate var(--rotate-duration) linear infinite;
+	height: 58px;
+	width: 58px;
+}
+.loading .outer {
+	stroke: var(--stroke-1);
+	stroke-dasharray: var(--data-2);
+	stroke-dashoffset: var(--data-3);
+	animation: load var(--duration) linear infinite;
+	animation-fill-mode: both;
+}
+.loading .inner {
+	stroke: var(--stroke-2);
+}
+@keyframes rotate {
+	0% {
+		transform: rotate(270deg);
+	}
+	50% {
+		transform: rotate(450deg);
+	}
+	100% {
+		transform: rotate(630deg);
+	}
+}
+@keyframes load {
+	0% {
+		stroke-dashoffset: var(--data-1);
+	}
+	50% {
+		stroke-dashoffset: var(--data-2);
+	}
+	100% {
+		stroke-dashoffset: var(--data-3);
+	}
+}
+
+.loading-container {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	height: 58px;
+	overflow: hidden;
+}
+
+.btn {
+	min-width: 200px;
+}
