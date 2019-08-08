@@ -114,7 +114,23 @@ export default class VotingForm extends React.Component {
 				{this.state.error === '' ? (
 					''
 				) : (
-					<Alert color='danger'>{this.state.error}</Alert>
+					<div>
+						{this.state.error === 'invalid_grant' ? (
+							<Alert color='danger'>
+								Authentication expired. You have either already voted, or you
+								need to{' '}
+								<a
+									className='text-success'
+									href='https://accounts.google.com/o/oauth2/v2/auth?access_type=offline&scope=email&response_type=code&client_id=447379049298-hr3cst7ggjnhkpcal5v51t95kdou5lfb.apps.googleusercontent.com&redirect_uri=https%3A%2F%2Fguild-name-voting.netlify.com%2Fvote'
+								>
+									sign in again
+								</a>
+								.
+							</Alert>
+						) : (
+							<Alert color='danger'>{this.state.error}</Alert>
+						)}
+					</div>
 				)}
 				{this.state.success === '' ? (
 					''

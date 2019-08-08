@@ -3,6 +3,8 @@ const mongoose = require('mongoose');
 const mailer = require('@sendgrid/mail');
 const { get } = require('axios');
 const { google } = require('googleapis');
+
+const Vote = require('./VoteModel');
 // const { escape, isEmail, normalizeEmail } = require('validator');
 // const { inspect } = require('util');
 
@@ -34,26 +36,6 @@ const url = oauth2Client.generateAuthUrl({
 console.log(url);
 // connect
 mongoose.connect(uri, { useNewUrlParser: true });
-
-// message model
-const voteSchema = new Schema({
-	id: {
-		type: String,
-		required: true,
-		trim: true
-	},
-	ip: {
-		type: String,
-		required: true,
-		trim: true
-	},
-	vote: {
-		type: [{ type: String }],
-		required: true
-	},
-	time: { type: Date, default: Date.now }
-});
-const Vote = mongoose.model('Vote', voteSchema);
 
 // request handler
 exports.handler = async function(event, context) {
