@@ -27,6 +27,7 @@ class Results extends Component {
 		super();
 		this.state = {
 			loading: false,
+			count: 0,
 			votes: []
 		};
 	}
@@ -65,6 +66,7 @@ class Results extends Component {
 				votes.sort((a, b) => b.count - a.count);
 				this.setState({
 					votes,
+					count: res.votes.length,
 					loading: false
 				});
 			}
@@ -76,29 +78,29 @@ class Results extends Component {
 	render() {
 		console.log('state', this.state);
 		return (
-			<div className='results'>
+			<div className="results">
 				{this.state.error === '' ? (
 					''
 				) : (
-					<Alert color='danger'>{this.state.error}</Alert>
+					<Alert color="danger">{this.state.error}</Alert>
 				)}
 				{this.state.loading ? (
-					<div className='loading loading-container'>
-						<svg viewBox='0,0,100,100'>
+					<div className="loading loading-container">
+						<svg viewBox="0,0,100,100">
 							<circle
-								className='inner'
+								className="inner"
 								cx={50}
 								cy={50}
 								r={45}
-								fill='none'
+								fill="none"
 								strokeWidth={10}
 							/>
 							<circle
-								className='outer'
+								className="outer"
 								cx={50}
 								cy={50}
 								r={45}
-								fill='none'
+								fill="none"
 								strokeWidth={10}
 							/>
 						</svg>
@@ -106,10 +108,13 @@ class Results extends Component {
 				) : (
 					<div>
 						<h1>Results</h1>
-
-						<div className='row'>
+						<h3>Total Vote Count: {this.state.count}</h3>
+						<div className="row">
 							{this.state.votes.map(vote => (
-								<div className='col-12 col-xl-6' key={vote.name}>
+								<div
+									className="col-12 col-xl-6"
+									key={vote.name}
+								>
 									<h5>
 										{vote.label}: {vote.count}
 									</h5>
