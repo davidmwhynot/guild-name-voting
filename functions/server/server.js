@@ -25,7 +25,7 @@ console.log('app start');
 
 router.get('/test', (req, res) => {
 	console.log('req', req.body);
-	res.send('hello');
+	res.json('hello');
 });
 
 router.get('/redirect', (req, res) => {
@@ -35,7 +35,7 @@ router.get('/redirect', (req, res) => {
 	res.end();
 });
 
-app.use('./netlify/functions/server', router);
+app.use('/.netlify/functions/server', router);
 
 // export
 module.exports.handler = serverless(app);

@@ -7,6 +7,14 @@ import Home from './components/Home';
 import Results from './components/Results';
 
 class App extends Component {
+	async componentDidMount() {
+		const res = await (await fetch('/.netlify/functions/server/test', {
+			method: 'GET'
+		})).json();
+
+		console.log('res', res);
+	}
+
 	render() {
 		return (
 			<Router>
