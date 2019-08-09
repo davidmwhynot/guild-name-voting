@@ -21,6 +21,7 @@ mongoose.connect(uri, { useNewUrlParser: true });
 const router = express.Router();
 
 router.get('/redirect', (req, res) => {
+	console.log('req', req.body);
 	res.set('Location', 'https://google.com');
 	res.statusCode(301);
 	res.end();
