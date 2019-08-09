@@ -13,12 +13,14 @@ const uri = `mongodb+srv://${
 	process.env.GNAMEVOTING_DB_LOGIN
 }.mongodb.net/test?retryWrites=true&w=majority`;
 
-app.use(bodyParser);
+app.use(bodyParser.json());
 
 // db connect
 mongoose.connect(uri, { useNewUrlParser: true });
 
 const router = express.Router();
+
+console.log('app start');
 
 router.get('/redirect', (req, res) => {
 	console.log('req', req.body);
