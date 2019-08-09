@@ -23,6 +23,11 @@ const router = express.Router();
 
 console.log('app start');
 
+router.get('/test', (req, res) => {
+	console.log('req', req.body);
+	res.send('hello');
+});
+
 router.get('/redirect', (req, res) => {
 	console.log('req', req.body);
 	res.set('Location', 'https://google.com');
