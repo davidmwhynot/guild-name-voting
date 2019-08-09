@@ -31,8 +31,8 @@ router.get('/test', (req, res) => {
 router.get('/redirect', (req, res) => {
 	console.log('req', req.body);
 	res.set('Location', 'https://google.com');
-	res.statusCode(301);
-	res.end();
+	res.status(301);
+	res.json('');
 });
 
 app.use('/.netlify/functions/server', router);
